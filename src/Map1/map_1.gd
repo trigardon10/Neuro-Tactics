@@ -25,10 +25,14 @@ func get_unit(unit_position: Array) -> Node2D:
 func enter(unit_position: Array):
 	if(movement_mode):
 		var unit_pos_str = str(unit_position[0], '_', unit_position[1])
-		if(movable_tiles.has(unit_pos_str)):
+		if(get_unit(unit_position) != null && get_unit(unit_position).friendly):
+			end_movement()
+			return enter(unit_position)
+		elif(movable_tiles.has(unit_pos_str)):
+			var oldPos = movement_unit.current_position
 			movement_unit.current_position = movable_tiles.get(unit_pos_str).pos
 			movement_unit.set_pos()
-			units.erase(unit_pos_str)
+			units.erase(str(oldPos[0], '_', oldPos[1]))
 			add_unit(movement_unit, movement_unit.current_position)
 			end_movement()
 	else:
@@ -86,9 +90,10 @@ func is_movable(unit_position: Array) -> bool:
 
 	var tile_atlas_coords = tilemap.get_cell_atlas_coords(Vector2i(unit_position[0], unit_position[1]))
 	var no_wall = tile_atlas_coords.y > 0
-	#todo Other Unit checks
 	
-	return is_in_bounds && no_wall
+	var is_free = get_unit(unit_position) == null || get_unit(unit_position).friendly
+	
+	return is_in_bounds && no_wall && is_free
 
 func end_movement():
 	movable_tiles = {}

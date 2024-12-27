@@ -3,9 +3,10 @@ extends "res://src/unit.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	unit_name = 'Neuro-sama'
-	unit_power = 3
-	unit_maxhealth = 10
-	unit_range = 5
-	unit_attack_range = 3
+	unit_name = 'Evil Neuro'
+	unit_power = 4
+	unit_maxhealth = 20
+	unit_range = 1
+	unit_attack_range = 1
+	friendly = false
 	super._ready()
