@@ -33,7 +33,7 @@ func _process(_delta: float) -> void:
 	pass
 
 func _unhandled_input(event):
-	if(get_parent().in_combat):
+	if(get_parent().in_combat || get_parent().enemy_turn):
 		return
 	for dir in inputs.keys():
 		if event.is_action_pressed(dir):
@@ -47,6 +47,10 @@ func _unhandled_input(event):
 		get_parent().cancel(current_position)
 
 func move(dir):
+	if(get_parent().in_combat || get_parent().enemy_turn):
+		hold[dir] = false
+		return
+
 	if(moving[dir]):
 		return
 	
@@ -75,8 +79,8 @@ func move(dir):
 	
 	move(dir)
 
-func set_pos():
+func set_pos(time:float = 0.05):
 	var new_pos = Vector2(current_position[0] * Globals.tile_size + (Globals.tile_size/2), current_position[1] * Globals.tile_size + (Globals.tile_size/2))
 	var tween = create_tween()
-	await tween.tween_property(self, "position", new_pos, 0.05).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(self, "position", new_pos, time).set_trans(Tween.TRANS_SINE)
 	get_parent().new_cursor_position()

@@ -10,6 +10,7 @@ var friendly = true
 var current_position = [0, 0]
 var special_name = "null"
 var special_tooltip = "null"
+var used = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -31,9 +32,10 @@ func set_pos(time:float = 0.2):
 func take_damage(value):
 	unit_health -= value
 	get_parent().new_cursor_position()
+	var old_modulate = modulate
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color(1,0,0,1), 0.1).set_trans(Tween.TRANS_SINE)
-	tween.tween_property(self, "modulate", Color(1,1,1,1), 0.1)
+	tween.tween_property(self, "modulate", old_modulate, 0.1)
 	await tween.finished
 	
 	if(unit_health <= 0):
@@ -42,3 +44,15 @@ func take_damage(value):
 		await deathtween.finished
 		get_parent().units.erase(str(current_position[0], '_', current_position[1]))
 		get_parent().new_cursor_position()
+
+func set_used():
+	used = true;
+	self.modulate = Color(0.5, 0.5, 0.5, 1)
+	get_parent().check_end_turn()
+
+func set_free():
+	used = false;
+	self.modulate = Color(1, 1, 1, 1)
+
+func do_turn():
+	await get_tree().create_timer(1).timeout

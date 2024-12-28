@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://dtxhngnpoenrn"]
+[gd_scene load_steps=23 format=4 uid="uid://dtxhngnpoenrn"]
 
 [ext_resource type="Script" path="res://src/Map1/map_1.gd" id="1_dc2ru"]
 [ext_resource type="TileSet" uid="uid://dirym2pwco6tr" path="res://assets/tiles/myTiles.tres" id="1_w6icf"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://src/Map1/Anny.gd" id="5_jy5qp"]
 [ext_resource type="Texture2D" uid="uid://524pyc0g6io7" path="res://assets/sprites/Vedal.png" id="6_ugxbe"]
 [ext_resource type="Texture2D" uid="uid://c5u2wxkv6g4yi" path="res://assets/sprites/anny.png" id="8_rjowo"]
+[ext_resource type="Script" path="res://src/Map1/Memory.gd" id="9_48cuy"]
 [ext_resource type="Theme" uid="uid://cvlf2btibwka4" path="res://assets/new_theme.tres" id="9_f0c18"]
 [ext_resource type="Script" path="res://src/Map1/unit_overlay.gd" id="9_ypkhc"]
 
@@ -93,10 +94,50 @@ script = ExtResource("5_jy5qp")
 texture = ExtResource("8_rjowo")
 
 [node name="Evil Neuro" type="Area2D" parent="."]
-position = Vector2(992, 1696)
+position = Vector2(992, 352)
 script = ExtResource("5_hkc61")
 
 [node name="Sprite2D" type="Sprite2D" parent="Evil Neuro"]
+scale = Vector2(-1, 1)
+texture = ExtResource("5_287x3")
+
+[node name="Memory1" type="Area2D" parent="."]
+position = Vector2(992, 1504)
+script = ExtResource("9_48cuy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Memory1"]
+scale = Vector2(-1, 1)
+texture = ExtResource("5_287x3")
+
+[node name="Memory2" type="Area2D" parent="."]
+position = Vector2(1568, 800)
+script = ExtResource("9_48cuy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Memory2"]
+scale = Vector2(-1, 1)
+texture = ExtResource("5_287x3")
+
+[node name="Memory3" type="Area2D" parent="."]
+position = Vector2(416, 800)
+script = ExtResource("9_48cuy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Memory3"]
+scale = Vector2(-1, 1)
+texture = ExtResource("5_287x3")
+
+[node name="Memory4" type="Area2D" parent="."]
+position = Vector2(416, 1120)
+script = ExtResource("9_48cuy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Memory4"]
+scale = Vector2(-1, 1)
+texture = ExtResource("5_287x3")
+
+[node name="Memory5" type="Area2D" parent="."]
+position = Vector2(1568, 1120)
+script = ExtResource("9_48cuy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Memory5"]
 scale = Vector2(-1, 1)
 texture = ExtResource("5_287x3")
 
@@ -261,6 +302,22 @@ text = "Name"
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "friendly"
+
+[node name="Turn overlay" type="CanvasLayer" parent="."]
+script = ExtResource("9_ypkhc")
+
+[node name="Container" type="Control" parent="Turn overlay"]
+layout_mode = 3
+anchors_preset = 0
+offset_bottom = 112.0
+theme = ExtResource("9_f0c18")
+
+[node name="Label" type="Label" parent="Turn overlay/Container"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 32
+text = "Your Turn"
 
 [connection signal="pressed" from="PopupMenu/VBoxContainer/Attack" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="PopupMenu/VBoxContainer/Special" to="." method="_on_special_pressed"]

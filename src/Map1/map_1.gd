@@ -10,6 +10,7 @@ var movement_unit: Node2D
 var tilemap: TileMapLayer
 var tilemap_highlight: TileMapLayer
 var in_combat = false
+var enemy_turn = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -144,6 +145,7 @@ func combat(attacking, target):
 	in_combat = true
 	# play animation
 	await target.take_damage(attacking.unit_power)
+	movement_unit.set_used()
 	in_combat = false
 
 func end_attack():
@@ -170,6 +172,32 @@ func open_action_menu():
 	$PopupMenu.position.y = (get_viewport_rect().size.y/2) + 34
 	$PopupMenu.show()
 
+func check_end_turn():
+	for unit in units.values():
+		if(unit.friendly && !unit.used):
+			return
+	
+	# All Units used
+	for unit in units.values():
+		if(unit.friendly):
+			unit.set_free()
+	
+	enemy_turn = true
+	$"Turn overlay/Container/Label".text = "Enemy Turn"
+	
+	do_enemy_turn()
+
+func do_enemy_turn():
+	for unit in units.values():
+		if(!unit.friendly):
+			$Cursor.current_position = unit.current_position.duplicate()
+			$Cursor.set_pos(0.3)
+			await unit.do_turn()
+	$Cursor.current_position = $"Neuro-sama".current_position.duplicate()
+	$Cursor.set_pos(0.3)
+	enemy_turn = false
+	$"Turn overlay/Container/Label".text = "Your Turn"
+
 func _on_attack_pressed() -> void:
 	$PopupMenu.hide()
 	start_attack()
@@ -177,6 +205,8 @@ func _on_attack_pressed() -> void:
 func _on_special_pressed() -> void:
 	$PopupMenu.hide()
 	print('TODO Special')
+	movement_unit.set_used()
 
 func _on_wait_pressed() -> void:
 	$PopupMenu.hide()
+	movement_unit.set_used()
