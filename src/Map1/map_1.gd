@@ -3,7 +3,9 @@ extends Node2D
 var mapsize: Vector2i
 var units: Dictionary = {}
 var movement_mode = false
+var attack_mode = false
 var movable_tiles: Dictionary = {}
+var attackable_tiles: Dictionary = {}
 var movement_unit: Node2D
 var tilemap: TileMapLayer
 var tilemap_highlight: TileMapLayer
@@ -47,6 +49,8 @@ func enter(unit_position: Array):
 			add_unit(movement_unit, movement_unit.current_position)
 			end_movement()
 			open_action_menu()
+	elif(attack_mode):
+		print('todo')
 	else:
 		var unit = get_unit(unit_position)
 		if(unit && unit.friendly):
@@ -96,12 +100,15 @@ func get_movable_tiles(unit_position, unit_range) -> Dictionary:
 		new_findings = []
 	return found_tiles
 
+func is_in_bounds(unit_position: Array) -> bool:
+	return unit_position[0] >= 0 && unit_position[0] < mapsize.x && unit_position[1] >= 0 && unit_position[1] < mapsize.y
+
 func is_movable(unit_position: Array) -> bool:
 	# oob checks
-	var is_in_bounds = unit_position[0] >= 0 && unit_position[0] < mapsize.x && unit_position[1] >= 0 && unit_position[1] < mapsize.y
+	var is_in_bounds = is_in_bounds(unit_position)
 
 	var tile_atlas_coords = tilemap.get_cell_atlas_coords(Vector2i(unit_position[0], unit_position[1]))
-	var no_wall = tile_atlas_coords.y > 0
+	var no_wall = tile_atlas_coords.y > 3
 	
 	var is_free = get_unit(unit_position) == null || get_unit(unit_position).friendly
 	
@@ -112,9 +119,40 @@ func end_movement():
 	tilemap_highlight.clear()
 	movement_mode = false
 
+func start_attack():
+	var unit_attack_range = movement_unit.unit_attack_range
+	attackable_tiles = get_in_range_tiles(movement_unit.current_position, unit_attack_range)
+	for tile in attackable_tiles.values():
+		tilemap_highlight.set_cell(Vector2i(tile['pos'][0], tile['pos'][1]), 2, Vector2i.DOWN)
+	attack_mode = true
+
+func get_in_range_tiles(unit_position, unit_range) -> Dictionary:
+	var found_tiles: Dictionary = {}
+	for x in range(-unit_range, unit_range + 1):
+		var distance_x = abs(x)
+		var distance_y = unit_range - distance_x
+		for y in range(-distance_y, distance_y + 1):
+			var newpos = [unit_position[0]+x, unit_position[1]+y]
+			var newposstr = str(newpos[0], '_', newpos[1])
+			if(is_in_bounds(newpos) && !(x == 0 && y == 0)):
+				found_tiles[newposstr] = {"pos" = newpos, "distance" = unit_range - (distance_x + distance_y)}
+	return found_tiles
+
+func end_attack():
+	attackable_tiles = {}
+	tilemap_highlight.clear()
+	attack_mode = false
+
 func cancel(_unit_position: Array):
 	if(movement_mode):
 		end_movement()
+		$Cursor.current_position = movement_unit.current_position.duplicate()
+		$Cursor.set_pos()
+	if(attack_mode):
+		end_attack()
+		$Cursor.current_position = movement_unit.current_position.duplicate()
+		$Cursor.set_pos()
+		open_action_menu()
 
 func open_action_menu():
 	$PopupMenu.set_focused_item(0)
@@ -129,7 +167,7 @@ func _on_popup_menu_id_pressed(id: int) -> void:
 	match id:
 		0:
 			#attack
-			print('TODO Attack')
+			start_attack()
 		1:
 			#special
 			print('TODO Special')
