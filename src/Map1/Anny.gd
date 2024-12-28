@@ -9,4 +9,5 @@ func _ready() -> void:
 	unit_range = 5
 	unit_attack_range = 5
 	special_name = "Healing Wish"
+	special_tooltip = "Restores health to an ally within range."
 	super._ready()

@@ -9,6 +9,7 @@ var unit_health
 var friendly = true
 var current_position = [0, 0]
 var special_name = "null"
+var special_tooltip = "null"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

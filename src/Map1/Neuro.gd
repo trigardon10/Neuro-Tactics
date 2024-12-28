@@ -9,4 +9,5 @@ func _ready() -> void:
 	unit_range = 5
 	unit_attack_range = 3
 	special_name = "Swarm Strike"
+	special_tooltip = "Powerful Attack. Can only target enemies next to Neuro."
 	super._ready()

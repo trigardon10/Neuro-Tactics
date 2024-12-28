@@ -9,7 +9,6 @@ var attackable_tiles: Dictionary = {}
 var movement_unit: Node2D
 var tilemap: TileMapLayer
 var tilemap_highlight: TileMapLayer
-var popup_moved = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -155,22 +154,20 @@ func cancel(_unit_position: Array):
 		open_action_menu()
 
 func open_action_menu():
-	$PopupMenu.set_focused_item(0)
-	$PopupMenu.set_item_text(1, movement_unit.special_name)
-	if(!popup_moved):
-		$PopupMenu.position.x += 138
-		popup_moved = true
-	$PopupMenu.visible = true
+	$PopupMenu/VBoxContainer/Attack.grab_focus()
+	$PopupMenu/VBoxContainer/Special/VBoxContainer/Label.text = movement_unit.special_name
+	$PopupMenu/VBoxContainer/Special/VBoxContainer/Tooltip.text = movement_unit.special_tooltip
+	$PopupMenu.position.x = (get_viewport_rect().size.x/2) - ($PopupMenu.get_visible_rect().size.x/2)
+	$PopupMenu.position.y = (get_viewport_rect().size.y/2) + 34
+	$PopupMenu.show()
 
-func _on_popup_menu_id_pressed(id: int) -> void:
-	print(id)
-	match id:
-		0:
-			#attack
-			start_attack()
-		1:
-			#special
-			print('TODO Special')
-		2:
-			#wait
-			pass
+func _on_attack_pressed() -> void:
+	$PopupMenu.hide()
+	start_attack()
+
+func _on_special_pressed() -> void:
+	$PopupMenu.hide()
+	print('TODO Special')
+
+func _on_wait_pressed() -> void:
+	$PopupMenu.hide()

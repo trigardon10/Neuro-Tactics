@@ -134,6 +134,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_bepiy")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bepiy")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_8iofa")
 text = "Attack"
+alignment = 0
 
 [node name="Special" type="Button" parent="PopupMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 64)
@@ -159,13 +160,12 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxEmpty_5w0l2")
 text = "Special"
-horizontal_alignment = 1
 
 [node name="Tooltip" type="Label" parent="PopupMenu/VBoxContainer/Special/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_3142k")
 text = "Tooltip"
-horizontal_alignment = 1
 
 [node name="Wait" type="Button" parent="PopupMenu/VBoxContainer"]
 layout_mode = 2
@@ -177,6 +177,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_bepiy")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bepiy")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_8hjvn")
 text = "Wait"
+alignment = 0
 
 [node name="Unit Overlay" type="CanvasLayer" parent="."]
 visible = false
