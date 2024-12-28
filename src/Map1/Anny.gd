@@ -8,4 +8,5 @@ func _ready() -> void:
 	unit_maxhealth = 8
 	unit_range = 5
 	unit_attack_range = 5
+	special_name = "Healing Wish"
 	super._ready()

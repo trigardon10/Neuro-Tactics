@@ -7,6 +7,7 @@ var movable_tiles: Dictionary = {}
 var movement_unit: Node2D
 var tilemap: TileMapLayer
 var tilemap_highlight: TileMapLayer
+var popup_moved = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,14 +17,15 @@ func _ready() -> void:
 
 func add_unit(unit: Node2D, unit_position: Array):
 	units[str(unit_position[0], '_', unit_position[1])] = unit;
+	new_cursor_position()
 
 func get_unit(unit_position: Array) -> Node2D:
 	if(units.has(str(unit_position[0], '_', unit_position[1]))):
 		return units[str(unit_position[0], '_', unit_position[1])];
 	return null
 
-func new_cursor_position(unit_position: Array):
-	var unit = get_unit(unit_position)
+func new_cursor_position():
+	var unit = get_unit($Cursor.current_position)
 	var unit_overlay: CanvasLayer = $"Unit Overlay"
 	if(unit):
 		unit_overlay.new_unit(unit)
@@ -34,16 +36,17 @@ func new_cursor_position(unit_position: Array):
 func enter(unit_position: Array):
 	if(movement_mode):
 		var unit_pos_str = str(unit_position[0], '_', unit_position[1])
-		if(get_unit(unit_position) != null && get_unit(unit_position).friendly):
+		if(get_unit(unit_position) != null && get_unit(unit_position).friendly && get_unit(unit_position) != movement_unit):
 			end_movement()
 			return enter(unit_position)
 		elif(movable_tiles.has(unit_pos_str)):
-			var oldPos = movement_unit.current_position
+			var oldPos = movement_unit.current_position.duplicate()
 			movement_unit.current_position = movable_tiles.get(unit_pos_str).pos
 			movement_unit.set_pos()
 			units.erase(str(oldPos[0], '_', oldPos[1]))
 			add_unit(movement_unit, movement_unit.current_position)
 			end_movement()
+			open_action_menu()
 	else:
 		var unit = get_unit(unit_position)
 		if(unit && unit.friendly):
@@ -60,7 +63,7 @@ func start_movement(unit: Node2D, unit_position: Array):
 
 func get_movable_tiles(unit_position, unit_range) -> Dictionary:
 	var found_tiles: Dictionary = {}
-	found_tiles[str(unit_position[0], '_', unit_position[1])] = {"pos" = unit_position, "distance" = 0}
+	found_tiles[str(unit_position[0], '_', unit_position[1])] = {"pos" = unit_position.duplicate(), "distance" = 0}
 	var current_findings = found_tiles.values()
 	var new_findings = []
 	for i in range(0, unit_range):
@@ -108,8 +111,28 @@ func end_movement():
 	movable_tiles = {}
 	tilemap_highlight.clear()
 	movement_mode = false
-	movement_unit = null
 
 func cancel(_unit_position: Array):
 	if(movement_mode):
 		end_movement()
+
+func open_action_menu():
+	$PopupMenu.set_focused_item(0)
+	$PopupMenu.set_item_text(1, movement_unit.special_name)
+	if(!popup_moved):
+		$PopupMenu.position.x += 138
+		popup_moved = true
+	$PopupMenu.visible = true
+
+func _on_popup_menu_id_pressed(id: int) -> void:
+	print(id)
+	match id:
+		0:
+			#attack
+			print('TODO Attack')
+		1:
+			#special
+			print('TODO Special')
+		2:
+			#wait
+			pass

@@ -8,4 +8,5 @@ func _ready() -> void:
 	unit_maxhealth = 10
 	unit_range = 5
 	unit_attack_range = 3
+	special_name = "Swarm Strike"
 	super._ready()
