@@ -1,0 +1,86 @@
+[gd_scene load_steps=4 format=3 uid="uid://b178lp23jx1ge"]
+
+[ext_resource type="Theme" uid="uid://cvlf2btibwka4" path="res://assets/new_theme.tres" id="1_xi6ic"]
+[ext_resource type="Script" path="res://src/Title/title.gd" id="1_yridu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tcebc"]
+font_size = 80
+outline_size = 12
+
+[node name="Title" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xi6ic")
+script = ExtResource("1_yridu")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.227333, 0, 0.44, 1)
+
+[node name="Title" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 120
+theme_override_constants/margin_bottom = 80
+
+[node name="VSplitContainer2" type="VBoxContainer" parent="Title"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Title/VSplitContainer2"]
+layout_mode = 2
+text = "Neuro Tactics"
+label_settings = SubResource("LabelSettings_tcebc")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="VSplitContainer2" type="VBoxContainer" parent="Title/VSplitContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Title/VSplitContainer2/VSplitContainer2"]
+custom_minimum_size = Vector2(500, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Start" type="Button" parent="Title/VSplitContainer2/VSplitContainer2/CenterContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Start"
+
+[node name="CenterContainer3" type="CenterContainer" parent="Title/VSplitContainer2/VSplitContainer2"]
+custom_minimum_size = Vector2(500, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Quit" type="Button" parent="Title/VSplitContainer2/VSplitContainer2/CenterContainer3"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Quit"
+
+[node name="Label2" type="Label" parent="Title/VSplitContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "V1.0.0"
+
+[connection signal="pressed" from="Title/VSplitContainer2/VSplitContainer2/CenterContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Title/VSplitContainer2/VSplitContainer2/CenterContainer3/Quit" to="." method="_on_quit_pressed"]

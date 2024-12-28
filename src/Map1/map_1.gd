@@ -22,6 +22,15 @@ func get_unit(unit_position: Array) -> Node2D:
 		return units[str(unit_position[0], '_', unit_position[1])];
 	return null
 
+func new_cursor_position(unit_position: Array):
+	var unit = get_unit(unit_position)
+	var unit_overlay: CanvasLayer = $"Unit Overlay"
+	if(unit):
+		unit_overlay.new_unit(unit)
+		unit_overlay.visible = true
+	else:
+		unit_overlay.visible = false
+
 func enter(unit_position: Array):
 	if(movement_mode):
 		var unit_pos_str = str(unit_position[0], '_', unit_position[1])
