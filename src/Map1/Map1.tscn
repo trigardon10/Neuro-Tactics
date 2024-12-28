@@ -93,7 +93,7 @@ script = ExtResource("5_jy5qp")
 texture = ExtResource("8_rjowo")
 
 [node name="Evil Neuro" type="Area2D" parent="."]
-position = Vector2(992, 352)
+position = Vector2(992, 1696)
 script = ExtResource("5_hkc61")
 
 [node name="Sprite2D" type="Sprite2D" parent="Evil Neuro"]

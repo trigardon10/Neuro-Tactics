@@ -9,6 +9,7 @@ var attackable_tiles: Dictionary = {}
 var movement_unit: Node2D
 var tilemap: TileMapLayer
 var tilemap_highlight: TileMapLayer
+var in_combat = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -35,8 +36,8 @@ func new_cursor_position():
 		unit_overlay.visible = false
 
 func enter(unit_position: Array):
+	var unit_pos_str = str(unit_position[0], '_', unit_position[1])
 	if(movement_mode):
-		var unit_pos_str = str(unit_position[0], '_', unit_position[1])
 		if(get_unit(unit_position) != null && get_unit(unit_position).friendly && get_unit(unit_position) != movement_unit):
 			end_movement()
 			return enter(unit_position)
@@ -49,7 +50,9 @@ func enter(unit_position: Array):
 			end_movement()
 			open_action_menu()
 	elif(attack_mode):
-		print('todo')
+		if(attackable_tiles.has(unit_pos_str) && get_unit(unit_position) != null && !get_unit(unit_position).friendly):
+			combat(movement_unit, get_unit(unit_position))
+			end_attack()
 	else:
 		var unit = get_unit(unit_position)
 		if(unit && unit.friendly):
@@ -136,6 +139,12 @@ func get_in_range_tiles(unit_position, unit_range) -> Dictionary:
 			if(is_in_bounds(newpos) && !(x == 0 && y == 0)):
 				found_tiles[newposstr] = {"pos" = newpos, "distance" = unit_range - (distance_x + distance_y)}
 	return found_tiles
+
+func combat(attacking, target):
+	in_combat = true
+	# play animation
+	await target.take_damage(attacking.unit_power)
+	in_combat = false
 
 func end_attack():
 	attackable_tiles = {}

@@ -33,6 +33,8 @@ func _process(_delta: float) -> void:
 	pass
 
 func _unhandled_input(event):
+	if(get_parent().in_combat):
+		return
 	for dir in inputs.keys():
 		if event.is_action_pressed(dir):
 			hold[dir] = true;
