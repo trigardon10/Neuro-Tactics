@@ -1,14 +1,17 @@
-[gd_scene load_steps=19 format=4 uid="uid://dtxhngnpoenrn"]
+[gd_scene load_steps=22 format=4 uid="uid://dtxhngnpoenrn"]
 
 [ext_resource type="Script" path="res://src/Map1/map_1.gd" id="1_dc2ru"]
 [ext_resource type="TileSet" uid="uid://dirym2pwco6tr" path="res://assets/tiles/myTiles.tres" id="1_w6icf"]
 [ext_resource type="Script" path="res://src/cursor.gd" id="2_x04r2"]
 [ext_resource type="Texture2D" uid="uid://rtgtsy2mqxb3" path="res://assets/sprites/Cursor.png" id="3_xtvvj"]
 [ext_resource type="Script" path="res://src/Map1/Neuro.gd" id="4_hh5us"]
+[ext_resource type="Texture2D" uid="uid://ds4pp6yb7bpoo" path="res://assets/sprites/Neuro.png" id="4_uyooe"]
 [ext_resource type="Texture2D" uid="uid://dtk8otrpcajbx" path="res://assets/sprites/placeholder.png" id="5_287x3"]
 [ext_resource type="Script" path="res://src/Map1/Vedal.gd" id="5_h6fud"]
 [ext_resource type="Script" path="res://src/Map1/EvilNeuro.gd" id="5_hkc61"]
 [ext_resource type="Script" path="res://src/Map1/Anny.gd" id="5_jy5qp"]
+[ext_resource type="Texture2D" uid="uid://524pyc0g6io7" path="res://assets/sprites/Vedal.png" id="6_ugxbe"]
+[ext_resource type="Texture2D" uid="uid://c5u2wxkv6g4yi" path="res://assets/sprites/anny.png" id="8_rjowo"]
 [ext_resource type="Theme" uid="uid://cvlf2btibwka4" path="res://assets/new_theme.tres" id="9_f0c18"]
 [ext_resource type="Script" path="res://src/Map1/unit_overlay.gd" id="9_ypkhc"]
 
@@ -73,21 +76,21 @@ position = Vector2(992, 1824)
 script = ExtResource("4_hh5us")
 
 [node name="Sprite2D" type="Sprite2D" parent="Neuro-sama"]
-texture = ExtResource("5_287x3")
+texture = ExtResource("4_uyooe")
 
 [node name="Vedal" type="Area2D" parent="."]
 position = Vector2(1120, 1824)
 script = ExtResource("5_h6fud")
 
 [node name="Sprite2D" type="Sprite2D" parent="Vedal"]
-texture = ExtResource("5_287x3")
+texture = ExtResource("6_ugxbe")
 
 [node name="Anny" type="Area2D" parent="."]
 position = Vector2(864, 1824)
 script = ExtResource("5_jy5qp")
 
 [node name="Sprite2D" type="Sprite2D" parent="Anny"]
-texture = ExtResource("5_287x3")
+texture = ExtResource("8_rjowo")
 
 [node name="Evil Neuro" type="Area2D" parent="."]
 position = Vector2(992, 352)
