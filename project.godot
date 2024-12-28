@@ -11,9 +11,11 @@ config_version=5
 [application]
 
 config/name="Neuro Tactics"
+config/version="1.0.0"
 run/main_scene="res://src/Title/title.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://assets/Icon.png"
+config/windows_native_icon="res://assets/Icon.ico"
 
 [autoload]
 
