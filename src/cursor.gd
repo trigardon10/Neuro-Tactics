@@ -12,15 +12,11 @@ var hold={
 	"up": false,
 	"down": false}
 
-var moving={
-	"right": false,
-	"left": false,
-	"up": false,
-	"down": false}
+var moving=false
 
 var current_position = [0, 0]
 
-var move_delay = 0.2
+var move_delay = 0.15
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -47,20 +43,26 @@ func _unhandled_input(event):
 		get_parent().cancel(current_position)
 
 func move(dir):
+	if(!is_inside_tree()):
+		return
+
 	if(get_parent().in_combat || get_parent().enemy_turn):
 		hold[dir] = false
 		return
 
-	if(moving[dir]):
+	if(moving):
 		return
 	
-	moving[dir] = true
-	if(!hold[dir]):
-		moving[dir] = false
-		return
+	moving = false
 	
-	current_position[0] += inputs[dir][0]
-	current_position[1] += inputs[dir][1]
+	for hdir in hold:
+		if(hold[hdir]):
+			current_position[0] += inputs[hdir][0]
+			current_position[1] += inputs[hdir][1]
+			moving = true
+		
+	if(!moving):
+		return
 
 	# oob checks
 	if(current_position[0] < 0):
@@ -75,11 +77,11 @@ func move(dir):
 	set_pos()
 	
 	await get_tree().create_timer(move_delay).timeout
-	moving[dir] = false
+	moving = false
 	
 	move(dir)
 
-func set_pos(time:float = 0.05):
+func set_pos(time:float = 0.03):
 	var new_pos = Vector2(current_position[0] * Globals.tile_size + (Globals.tile_size/2), current_position[1] * Globals.tile_size + (Globals.tile_size/2))
 	var tween = create_tween()
 	tween.tween_property(self, "position", new_pos, time).set_trans(Tween.TRANS_SINE)

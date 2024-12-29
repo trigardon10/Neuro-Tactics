@@ -190,6 +190,8 @@ func check_end_turn():
 func do_enemy_turn():
 	for unit in units.values():
 		if(!unit.friendly):
+			if(!is_inside_tree()):
+				return
 			$Cursor.current_position = unit.current_position.duplicate()
 			$Cursor.set_pos(0.3)
 			await unit.do_turn()
@@ -204,7 +206,7 @@ func _on_attack_pressed() -> void:
 
 func _on_special_pressed() -> void:
 	$PopupMenu.hide()
-	print('TODO Special')
+	await movement_unit.use_special()
 	movement_unit.set_used()
 
 func _on_wait_pressed() -> void:

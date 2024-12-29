@@ -56,3 +56,6 @@ func set_free():
 
 func do_turn():
 	await get_tree().create_timer(1).timeout
+
+func use_special():
+	await take_damage(20)

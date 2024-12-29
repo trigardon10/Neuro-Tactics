@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://dtxhngnpoenrn"]
+[gd_scene load_steps=26 format=4 uid="uid://dtxhngnpoenrn"]
 
 [ext_resource type="Script" path="res://src/Map1/map_1.gd" id="1_dc2ru"]
 [ext_resource type="TileSet" uid="uid://dirym2pwco6tr" path="res://assets/tiles/myTiles.tres" id="1_w6icf"]
@@ -17,8 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://0hsaxvwivtxc" path="res://assets/sprites/EvilNeuro.png" id="10_yu7je"]
 [ext_resource type="Texture2D" uid="uid://feu1bv6krt8k" path="res://assets/sprites/memory_Mini.png" id="12_83f4r"]
 [ext_resource type="Texture2D" uid="uid://men7tbblh8nq" path="res://assets/sprites/memory_Toma.png" id="13_xn7ua"]
-[ext_resource type="Texture2D" uid="uid://thg2kluxs4je" path="res://assets/sprites/memory_Cerber.png" id="14_s3kjw"]
-[ext_resource type="Texture2D" uid="uid://d0wodf3xm38wk" path="res://assets/sprites/memory_Camilla.png" id="15_4fnul"]
+[ext_resource type="Texture2D" uid="uid://dwok7vmii7ba5" path="res://assets/sprites/memory_base.png" id="14_u74ff"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yc3xe"]
 bg_color = Color(0.02, 0.4, 1, 1)
@@ -123,14 +122,14 @@ position = Vector2(416, 800)
 script = ExtResource("9_48cuy")
 
 [node name="Sprite2D" type="Sprite2D" parent="Memory3"]
-texture = ExtResource("14_s3kjw")
+texture = ExtResource("14_u74ff")
 
 [node name="Memory4" type="Area2D" parent="."]
 position = Vector2(992, 800)
 script = ExtResource("9_48cuy")
 
 [node name="Sprite2D" type="Sprite2D" parent="Memory4"]
-texture = ExtResource("15_4fnul")
+texture = ExtResource("14_u74ff")
 
 [node name="Cursor" type="Area2D" parent="."]
 position = Vector2(992, 1824)
