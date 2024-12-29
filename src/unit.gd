@@ -11,6 +11,7 @@ var current_position = [0, 0]
 var special_name = "null"
 var special_tooltip = "null"
 var used = false
+var force_sprite = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,8 +35,10 @@ func take_damage(value):
 	get_parent().new_cursor_position()
 	var old_modulate = modulate
 	var tween = create_tween()
-	tween.tween_property(self, "modulate", Color(1,0,0,1), 0.1).set_trans(Tween.TRANS_SINE)
-	tween.tween_property(self, "modulate", old_modulate, 0.1)
+	var mod_color = Color(1,0,0,1) if value >= 0 else Color(0.5,1,0.5,1)
+	var mod_time = 0.1 if value >= 0 else 0.3
+	tween.tween_property(self, "modulate", mod_color, mod_time).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(self, "modulate", old_modulate, mod_time)
 	await tween.finished
 	
 	if(unit_health <= 0):
@@ -48,7 +51,7 @@ func take_damage(value):
 func set_used():
 	used = true;
 	self.modulate = Color(0.5, 0.5, 0.5, 1)
-	get_parent().check_end_turn()
+	get_parent().check_end_turn(self)
 
 func set_free():
 	used = false;
@@ -59,3 +62,25 @@ func do_turn():
 
 func use_special():
 	await take_damage(20)
+	set_used()
+
+func viable_special_unit(_unit):
+	return true
+
+func finish_special(_unit):
+	set_used()
+
+
+
+func get_smallest_distance(pos, units):
+	var smallest_distance = -1
+	for unit in units:
+		var distance = get_distance(pos, unit.current_position)
+		if(smallest_distance == -1 || distance < smallest_distance):
+			smallest_distance = distance
+	return smallest_distance
+
+func get_distance(pos1, pos2):
+	var x = abs(pos1[0] - pos2[0])
+	var y = abs(pos1[1] - pos2[1])
+	return x+y

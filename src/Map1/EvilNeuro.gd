@@ -9,6 +9,7 @@ func _ready() -> void:
 	unit_range = 0
 	unit_attack_range = 5
 	friendly = false
+	force_sprite = true
 	super._ready()
 
 func take_damage(value):
@@ -17,6 +18,6 @@ func take_damage(value):
 		await $"../FadeContainer".fade_in()
 		get_tree().change_scene_to_file("res://src/Outro/outro.tscn")
 
-func do_turn():
-	take_damage(20)
+#func do_turn():
+#	take_damage(20)
 	
