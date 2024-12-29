@@ -10,3 +10,13 @@ func _ready() -> void:
 	unit_attack_range = 5
 	friendly = false
 	super._ready()
+
+func take_damage(value):
+	await super.take_damage(value)
+	if(unit_health <= 0):
+		await $"../FadeContainer".fade_in()
+		get_tree().change_scene_to_file("res://src/Outro/outro.tscn")
+
+func do_turn():
+	take_damage(20)
+	

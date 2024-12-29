@@ -40,7 +40,7 @@ func take_damage(value):
 	
 	if(unit_health <= 0):
 		var deathtween = create_tween()
-		deathtween.tween_property(self, "modulate", Color(1,1,1,0), 1).set_trans(Tween.TRANS_SINE)
+		deathtween.tween_property(self, "modulate", Color(1,1,1,0), 0.6).set_trans(Tween.TRANS_SINE)
 		await deathtween.finished
 		get_parent().units.erase(str(current_position[0], '_', current_position[1]))
 		get_parent().new_cursor_position()

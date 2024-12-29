@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://dtxhngnpoenrn"]
+[gd_scene load_steps=28 format=4 uid="uid://dtxhngnpoenrn"]
 
 [ext_resource type="Script" path="res://src/Map1/map_1.gd" id="1_dc2ru"]
 [ext_resource type="TileSet" uid="uid://dirym2pwco6tr" path="res://assets/tiles/myTiles.tres" id="1_w6icf"]
@@ -19,9 +19,10 @@
 [ext_resource type="Texture2D" uid="uid://men7tbblh8nq" path="res://assets/sprites/memory_Toma.png" id="13_xn7ua"]
 [ext_resource type="Texture2D" uid="uid://thg2kluxs4je" path="res://assets/sprites/memory_Cerber.png" id="14_s3kjw"]
 [ext_resource type="Texture2D" uid="uid://d0wodf3xm38wk" path="res://assets/sprites/memory_Camilla.png" id="15_4fnul"]
+[ext_resource type="Script" path="res://src/fade_container.gd" id="20_56s2y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yc3xe"]
-bg_color = Color(0.02, 0.4, 1, 1)
+bg_color = Color(0.2, 0.4, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bepiy"]
 content_margin_left = 4.0
@@ -338,6 +339,19 @@ text = "DEFEAT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="FadeContainer" type="CanvasLayer" parent="."]
+script = ExtResource("20_56s2y")
+
+[node name="ColorRect" type="ColorRect" parent="FadeContainer"]
+custom_minimum_size = Vector2(0, 150)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [connection signal="pressed" from="PopupMenu/VBoxContainer/Attack" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="PopupMenu/VBoxContainer/Special" to="." method="_on_special_pressed"]
 [connection signal="pressed" from="PopupMenu/VBoxContainer/Wait" to="." method="_on_wait_pressed"]
+[connection signal="ready" from="FadeContainer/ColorRect" to="." method="_on_color_rect_ready"]

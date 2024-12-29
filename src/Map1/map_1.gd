@@ -10,7 +10,7 @@ var movement_unit: Node2D
 var tilemap: TileMapLayer
 var tilemap_highlight: TileMapLayer
 var in_combat = false
-var enemy_turn = false
+var enemy_turn = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -212,3 +212,8 @@ func _on_special_pressed() -> void:
 func _on_wait_pressed() -> void:
 	$PopupMenu.hide()
 	movement_unit.set_used()
+
+
+func _on_color_rect_ready() -> void:
+	await $FadeContainer.fade_out()
+	enemy_turn = false
