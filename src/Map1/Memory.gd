@@ -89,4 +89,7 @@ func do_turn():
 		await get_parent().animate_attack(self, unit_to_attack)
 		await unit_to_attack.take_damage(unit_power)
 		
+		if(!is_inside_tree()):
+			return
+		
 		await get_tree().create_timer(0.5).timeout

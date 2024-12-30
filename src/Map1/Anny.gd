@@ -10,6 +10,8 @@ func _ready() -> void:
 	unit_attack_range = 5
 	special_name = "Healing Star"
 	special_tooltip = "Restores health to an ally within range."
+	sprite = preload("res://assets/sprites/star.png")
+	dont_rotate = true
 	super._ready()
 
 func use_special():
@@ -24,8 +26,10 @@ func viable_special_unit(unit):
 
 func finish_special(unit):
 	get_parent().in_combat = true
+	if(unit != self):
+		force_sprite = true
 	await get_parent().animate_attack(self, unit)
+	force_sprite = false
 	await unit.take_damage(-20)
 	set_used()
 	get_parent().in_combat = false
-	set_used()

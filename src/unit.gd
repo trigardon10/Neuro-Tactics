@@ -11,7 +11,9 @@ var current_position = [0, 0]
 var special_name = "null"
 var special_tooltip = "null"
 var used = false
+var sprite =  null
 var force_sprite = false
+var dont_rotate = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -78,8 +80,6 @@ func viable_special_unit(_unit):
 func finish_special(_unit):
 	set_used()
 
-
-
 func get_smallest_distance(pos, units):
 	var smallest_distance = -1
 	for unit in units:
@@ -92,3 +92,6 @@ func get_distance(pos1, pos2):
 	var x = abs(pos1[0] - pos2[0])
 	var y = abs(pos1[1] - pos2[1])
 	return x+y
+
+func get_distance_to(unit):
+	return get_distance(current_position, unit.current_position)

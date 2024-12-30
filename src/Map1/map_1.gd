@@ -162,8 +162,33 @@ func combat(attacking, target):
 	await movement_unit.set_used()
 	in_combat = false
 
-func animate_attack(attacking, target):
-	pass
+func animate_attack(attacking: Node2D, target: Node2D):
+	var distance = attacking.get_distance_to(target)
+	var vector_attacking = Vector2i(attacking.current_position[0], attacking.current_position[1])
+	var vector_target = Vector2i(target.current_position[0], target.current_position[1])
+	var vector_diff = Vector2(vector_target - vector_attacking)
+	if(attacking.sprite != null && (distance > 1 || attacking.force_sprite)):
+		var distance_direct = vector_attacking.distance_to(vector_target)
+		var scale_x = 1
+		if(vector_diff.x <= 0):
+			vector_diff.x = abs(vector_diff.x)
+			vector_diff.y = -vector_diff.y
+			scale_x = -1
+		$Projectile.position = Vector2(attacking.position)
+		$Projectile/Sprite2D.texture = attacking.sprite
+		$Projectile.rotation = vector_diff.angle() if !attacking.dont_rotate else 0
+		$Projectile.scale.x = scale_x
+		$Projectile.visible = true
+		var tween = create_tween()
+		tween.tween_property($Projectile, "position", Vector2(target.position), distance_direct * 0.05 + 0.2).set_trans(Tween.TRANS_SINE)
+		await tween.finished
+		$Projectile.visible = false
+	elif (distance == 1):
+		var tween = create_tween()
+		tween.tween_property(attacking, "position", attacking.position + (vector_diff * 32), 0.05).set_trans(Tween.TRANS_SINE)
+		await tween.finished
+		attacking.set_pos(0.05)
+		# TODO melee
 
 func end_attack():
 	attackable_tiles = {}
@@ -241,6 +266,8 @@ func do_enemy_turn():
 			$Cursor.current_position = unit.current_position.duplicate()
 			$Cursor.set_pos(0.2)
 			await unit.do_turn()
+			if(!is_inside_tree()):
+				return
 	$Cursor.current_position = $"Neuro-sama".current_position.duplicate()
 	await $Cursor.set_pos(0.2)
 	enemy_turn = false
