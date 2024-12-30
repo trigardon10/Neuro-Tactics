@@ -1,18 +1,26 @@
 # Neuro-Tactics
-Neuro-sama themed tactics game made in Godot for the 2024 Neuro-sama Gamejam: https://itch.io/jam/neuro
+Neuro Tactics is a Neuro-sama themed tactics game made in Godot for the 2024 Neuro-sama Gamejam: https://itch.io/jam/neuro
 
-### Planned features
-- Simple turn based combat
-- 2D pixelart sprites
-- Story Prolog and Epilog
-- One map
-- Three playable units with unique moves
-- One minion enemy type and one Boss enemy
-- Story and map based on theme
-- Neuro-sama API implementation
+This is my first Game ever, I hope you enjoy it!
 
-### Possible future features 
-- Multiple maps with story in between
-- Power progression system
-- More playable units
-- More/Better art and animations
+### How to play
+
+Move your units by selecting them with the cursor and pressing the Select Button. The stats of units are displayed when hovering them with the cursor. Your turn is over after you moved all your units.
+
+Goal is to defeat Evil. When Neuro dies you lose the game.
+
+### Buttons
+
+Movement: Arrow Keys / WASD
+
+Select: Space / Enter
+
+Cancel: Escape / Backspace
+
+### Credits
+
+Most Spritework was done by my friend Longbunny
+
+The Midi Version of LIFE was made by Discord User "chxithesequel"
+
+Other Music and Sounds were taken from pixabay.com
