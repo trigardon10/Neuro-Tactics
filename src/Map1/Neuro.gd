@@ -24,6 +24,7 @@ func take_damage(value):
 		get_tree().change_scene_to_file("res://src/Title/title.tscn")
 
 func use_special():
+	get_parent().play_animation(self, "atk")
 	get_parent().special_tiles = get_parent().get_in_range_tiles(current_position, 1)
 	for tile in get_parent().special_tiles.values():
 		get_parent().tilemap_highlight.set_cell(Vector2i(tile['pos'][0], tile['pos'][1]), 2, Vector2i.DOWN)
@@ -35,4 +36,8 @@ func viable_special_unit(unit):
 func finish_special(unit):
 	unit_power = 6
 	await get_parent().combat(self, unit)
-	unit_power = 3
+	unit_power = 3#
+	
+func test():
+	print("Test")	
+	pass

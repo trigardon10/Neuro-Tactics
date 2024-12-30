@@ -75,6 +75,7 @@ func enter(unit_position: Array):
 			start_movement(unit, unit_position)
 
 func start_movement(unit: Node2D, unit_position: Array):
+	play_animation(unit, "walk")
 	var unit_range = unit.unit_range
 	movable_tiles = get_movable_tiles(unit_position, unit_range)
 	for tile in movable_tiles.values():
@@ -134,11 +135,14 @@ func is_movable(unit_position: Array, friendly = true) -> bool:
 func end_movement():
 	movable_tiles = {}
 	tilemap_highlight.clear()
+	play_animation(movement_unit, "idle")
 	movement_mode = false
 
 func start_attack():
 	var unit_attack_range = movement_unit.unit_attack_range
 	attackable_tiles = get_in_range_tiles(movement_unit.current_position, unit_attack_range)
+	play_animation(movement_unit, "atk")
+
 	for tile in attackable_tiles.values():
 		tilemap_highlight.set_cell(Vector2i(tile['pos'][0], tile['pos'][1]), 2, Vector2i.DOWN)
 	attack_mode = true
@@ -160,6 +164,7 @@ func combat(attacking, target):
 	await animate_attack(attacking, target)
 	await target.take_damage(attacking.unit_power)
 	await movement_unit.set_used()
+	play_animation(movement_unit, "idle")
 	in_combat = false
 
 func animate_attack(attacking, target):
@@ -182,6 +187,7 @@ func cancel(_unit_position: Array):
 		end_movement()
 		$Cursor.current_position = movement_unit.current_position.duplicate()
 		$Cursor.set_pos()
+		play_animation(movement_unit, "idle")
 	if(attack_mode):
 		$"Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
 		$"Sounds".play()
@@ -189,6 +195,7 @@ func cancel(_unit_position: Array):
 		$Cursor.current_position = movement_unit.current_position.duplicate()
 		$Cursor.set_pos()
 		open_action_menu()
+		play_animation(movement_unit, "walk")
 	if(special_mode):
 		$"Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
 		$"Sounds".play()
@@ -196,6 +203,7 @@ func cancel(_unit_position: Array):
 		$Cursor.current_position = movement_unit.current_position.duplicate()
 		$Cursor.set_pos()
 		open_action_menu()
+		play_animation(movement_unit, "walk")
 
 func open_action_menu():
 	$Popup/PopupMenu/VBoxContainer/Attack.grab_focus()
@@ -275,3 +283,8 @@ func _on_color_rect_ready() -> void:
 
 func _on_memory_1_ready() -> void:
 	$Memory1.active = true
+	
+func play_animation(unit, anim_name):
+	var sprite = unit.get_node("AnimatedSprite2D") as AnimatedSprite2D
+	if sprite != null:
+		sprite.play(anim_name)

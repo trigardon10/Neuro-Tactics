@@ -13,12 +13,15 @@ var special_tooltip = "null"
 var used = false
 var force_sprite = false
 
+var animated_sprite_2d: AnimatedSprite2D
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	unit_health = unit_maxhealth
 	current_position = [floor(position.x / Globals.tile_size), floor(position.y / Globals.tile_size)]
 	set_pos()
 	get_parent().add_unit(self, current_position)
+	animated_sprite_2d = get_node("AnimatedSprite2D")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,8 +30,17 @@ func _process(_delta: float) -> void:
 
 func set_pos(time:float = 0.2):
 	var new_pos = Vector2(current_position[0] * Globals.tile_size + (Globals.tile_size/2), current_position[1] * Globals.tile_size + (Globals.tile_size/2))
+	
+	if animated_sprite_2d != null:
+		animated_sprite_2d.play("walk")
+		
 	var tween = create_tween()
+	
 	tween.tween_property(self, "position", new_pos, time).set_trans(Tween.TRANS_SINE)
+	
+	#if animated_sprite_2d != null:
+		#print("ayy")
+
 
 func take_damage(value):
 	unit_health -= value
@@ -77,7 +89,6 @@ func viable_special_unit(_unit):
 
 func finish_special(_unit):
 	set_used()
-
 
 
 func get_smallest_distance(pos, units):

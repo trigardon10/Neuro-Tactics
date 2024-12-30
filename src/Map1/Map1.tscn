@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://dtxhngnpoenrn"]
+[gd_scene load_steps=46 format=4 uid="uid://dtxhngnpoenrn"]
 
 [ext_resource type="Script" path="res://src/Map1/map_1.gd" id="1_dc2ru"]
 [ext_resource type="TileSet" uid="uid://dirym2pwco6tr" path="res://assets/tiles/myTiles.tres" id="1_w6icf"]
@@ -9,12 +9,15 @@
 [ext_resource type="Script" path="res://src/Map1/Vedal.gd" id="5_h6fud"]
 [ext_resource type="Script" path="res://src/Map1/EvilNeuro.gd" id="5_hkc61"]
 [ext_resource type="Script" path="res://src/Map1/Anny.gd" id="5_jy5qp"]
+[ext_resource type="Texture2D" uid="uid://crfyjttpaljhg" path="res://assets/sprites/Neuro-sheet.png" id="5_nvj7o"]
 [ext_resource type="Texture2D" uid="uid://524pyc0g6io7" path="res://assets/sprites/Vedal.png" id="6_ugxbe"]
+[ext_resource type="Texture2D" uid="uid://dnxjmdb783jlp" path="res://assets/sprites/Vedal-sheet.png" id="8_c2ske"]
 [ext_resource type="Texture2D" uid="uid://c5u2wxkv6g4yi" path="res://assets/sprites/anny.png" id="8_rjowo"]
 [ext_resource type="Script" path="res://src/Map1/Memory.gd" id="9_48cuy"]
 [ext_resource type="Theme" uid="uid://cvlf2btibwka4" path="res://assets/new_theme.tres" id="9_f0c18"]
 [ext_resource type="Script" path="res://src/Map1/unit_overlay.gd" id="9_ypkhc"]
 [ext_resource type="Texture2D" uid="uid://0hsaxvwivtxc" path="res://assets/sprites/EvilNeuro.png" id="10_yu7je"]
+[ext_resource type="Texture2D" uid="uid://b4gmmek37gk0x" path="res://assets/sprites/anny-sheet.png" id="11_itdlt"]
 [ext_resource type="Texture2D" uid="uid://feu1bv6krt8k" path="res://assets/sprites/memory_Mini.png" id="12_83f4r"]
 [ext_resource type="Texture2D" uid="uid://men7tbblh8nq" path="res://assets/sprites/memory_Toma.png" id="13_xn7ua"]
 [ext_resource type="Texture2D" uid="uid://thg2kluxs4je" path="res://assets/sprites/memory_Cerber.png" id="14_s3kjw"]
@@ -22,6 +25,132 @@
 [ext_resource type="Script" path="res://src/Map1/popup.gd" id="18_xoaoo"]
 [ext_resource type="Script" path="res://src/fade_container.gd" id="20_56s2y"]
 [ext_resource type="AudioStream" uid="uid://deh28l01g52q8" path="res://assets/Music/kim-lightyear-angel-eyes-chiptune-edit-110226.mp3" id="21_yn673"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gjio"]
+atlas = ExtResource("5_nvj7o")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imc4r"]
+atlas = ExtResource("5_nvj7o")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_215es"]
+atlas = ExtResource("5_nvj7o")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8kcj"]
+atlas = ExtResource("5_nvj7o")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gwor"]
+atlas = ExtResource("5_nvj7o")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_peyff"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2gjio")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_imc4r")
+}],
+"loop": true,
+"name": &"atk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_215es")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8kcj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gwor")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ly641"]
+atlas = ExtResource("8_c2ske")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06uvo"]
+atlas = ExtResource("8_c2ske")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tniv"]
+atlas = ExtResource("8_c2ske")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qag3c"]
+atlas = ExtResource("8_c2ske")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bq5x"]
+atlas = ExtResource("8_c2ske")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_px2gl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ly641")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_06uvo")
+}],
+"loop": true,
+"name": &"atk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tniv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qag3c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3bq5x")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xb5bo"]
+atlas = ExtResource("11_itdlt")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b3hv7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xb5bo")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bepiy"]
 bg_color = Color(0, 0, 1, 1)
@@ -75,21 +204,38 @@ position = Vector2(992, 1824)
 script = ExtResource("4_hh5us")
 
 [node name="Sprite2D" type="Sprite2D" parent="Neuro-sama"]
+visible = false
 texture = ExtResource("4_uyooe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Neuro-sama"]
+sprite_frames = SubResource("SpriteFrames_peyff")
+animation = &"walk"
+frame = 1
+frame_progress = 0.613907
 
 [node name="Vedal" type="Area2D" parent="."]
 position = Vector2(1120, 1760)
 script = ExtResource("5_h6fud")
 
 [node name="Sprite2D" type="Sprite2D" parent="Vedal"]
+visible = false
 texture = ExtResource("6_ugxbe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Vedal"]
+sprite_frames = SubResource("SpriteFrames_px2gl")
+animation = &"idle"
 
 [node name="Anny" type="Area2D" parent="."]
 position = Vector2(864, 1760)
 script = ExtResource("5_jy5qp")
 
 [node name="Sprite2D" type="Sprite2D" parent="Anny"]
+visible = false
 texture = ExtResource("8_rjowo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Anny"]
+sprite_frames = SubResource("SpriteFrames_b3hv7")
+animation = &"new_animation"
 
 [node name="Evil Neuro" type="Area2D" parent="."]
 position = Vector2(992, 352)
