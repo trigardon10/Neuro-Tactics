@@ -221,7 +221,7 @@ func cancel(_unit_position: Array):
 		$Cursor.current_position = movement_unit.current_position.duplicate()
 		$Cursor.set_pos()
 		open_action_menu()
-		play_animation(movement_unit, "walk")
+		play_animation(movement_unit, "idle")
 	if(special_mode):
 		$"Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
 		$"Sounds".play()
@@ -229,7 +229,7 @@ func cancel(_unit_position: Array):
 		$Cursor.current_position = movement_unit.current_position.duplicate()
 		$Cursor.set_pos()
 		open_action_menu()
-		play_animation(movement_unit, "walk")
+		play_animation(movement_unit, "idle")
 
 func open_action_menu():
 	$Popup/PopupMenu/VBoxContainer/Attack.grab_focus()
@@ -301,6 +301,7 @@ func _on_wait_pressed() -> void:
 	$Popup.hide()
 	$"Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
 	$"Sounds".play()
+	play_animation(movement_unit, "idle")
 	movement_unit.set_used()
 
 

@@ -15,6 +15,7 @@ func _ready() -> void:
 	super._ready()
 
 func use_special():
+	get_parent().play_animation(self, "atk")
 	get_parent().special_tiles = get_parent().get_in_range_tiles(current_position, unit_attack_range)
 	get_parent().special_tiles[str(current_position[0], '_', current_position[1])] = {"pos"= current_position.duplicate(), "distance"= 0}
 	for tile in get_parent().special_tiles.values():
