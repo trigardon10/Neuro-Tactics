@@ -45,6 +45,8 @@ func enter(unit_position: Array):
 			end_movement()
 			return enter(unit_position)
 		elif(movable_tiles.has(unit_pos_str)):
+			$"Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
+			$"Sounds".play()
 			var oldPos = movement_unit.current_position.duplicate()
 			movement_unit.current_position = movable_tiles.get(unit_pos_str).pos
 			movement_unit.set_pos()
@@ -54,15 +56,21 @@ func enter(unit_position: Array):
 			open_action_menu()
 	elif(attack_mode):
 		if(attackable_tiles.has(unit_pos_str) && get_unit(unit_position) != null && !get_unit(unit_position).friendly):
+			$"Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
+			$"Sounds".play()
 			combat(movement_unit, get_unit(unit_position))
 			end_attack()
 	elif(special_mode):
 		if(special_tiles.has(unit_pos_str) && get_unit(unit_position) != null && movement_unit.viable_special_unit(get_unit(unit_position))):
+			$"Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
+			$"Sounds".play()
 			movement_unit.finish_special(get_unit(unit_position))
 			end_special()
 	else:
 		var unit = get_unit(unit_position)
-		if(unit && unit.friendly):
+		if(unit && unit.friendly && !unit.used):
+			$"Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
+			$"Sounds".play()
 			print(unit.unit_name)
 			start_movement(unit, unit_position)
 
@@ -151,7 +159,7 @@ func combat(attacking, target):
 	in_combat = true
 	await animate_attack(attacking, target)
 	await target.take_damage(attacking.unit_power)
-	movement_unit.set_used()
+	await movement_unit.set_used()
 	in_combat = false
 
 func animate_attack(attacking, target):
@@ -169,15 +177,21 @@ func end_special():
 
 func cancel(_unit_position: Array):
 	if(movement_mode):
+		$"Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
+		$"Sounds".play()
 		end_movement()
 		$Cursor.current_position = movement_unit.current_position.duplicate()
 		$Cursor.set_pos()
 	if(attack_mode):
+		$"Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
+		$"Sounds".play()
 		end_attack()
 		$Cursor.current_position = movement_unit.current_position.duplicate()
 		$Cursor.set_pos()
 		open_action_menu()
 	if(special_mode):
+		$"Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
+		$"Sounds".play()
 		end_special()
 		$Cursor.current_position = movement_unit.current_position.duplicate()
 		$Cursor.set_pos()
@@ -192,8 +206,9 @@ func open_action_menu():
 	$PopupMenu.show()
 
 func check_end_turn(ended_unit):
-	$Cursor.current_position = ended_unit.current_position.duplicate()
-	await $Cursor.set_pos(0.2)
+	if(ended_unit.current_position[0] != $Cursor.current_position[0] || ended_unit.current_position[1] != $Cursor.current_position[1]):
+		$Cursor.current_position = ended_unit.current_position.duplicate()
+		await $Cursor.set_pos(0.2)
 	
 	if(ended_unit.current_position[1] <= 18):
 		$Memory2.active = true
@@ -236,14 +251,20 @@ func custom_index_sort(a: Node, b: Node) -> bool:
 
 func _on_attack_pressed() -> void:
 	$PopupMenu.hide()
+	$"Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
+	$"Sounds".play()
 	start_attack()
 
 func _on_special_pressed() -> void:
 	$PopupMenu.hide()
+	$"Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
+	$"Sounds".play()
 	await movement_unit.use_special()
 
 func _on_wait_pressed() -> void:
 	$PopupMenu.hide()
+	$"Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
+	$"Sounds".play()
 	movement_unit.set_used()
 
 

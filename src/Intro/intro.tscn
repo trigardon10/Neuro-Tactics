@@ -121,3 +121,6 @@ script = ExtResource("10_6v3rg")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(994, 1831)
 zoom = Vector2(2, 2)
+
+[node name="Sounds" type="AudioStreamPlayer" parent="."]
+volume_db = -8.201

@@ -25,6 +25,8 @@ func use_special():
 func take_damage(value):
 	if turle_mode:
 		turle_mode = false
+		$"../Sounds".stream = preload("res://assets/sounds/blipSelect.wav")
+		$"../Sounds".play()
 		var tween = create_tween()
 		var old_modulate = modulate
 		tween.tween_property(self, "modulate", Color(1,1,1,1), 0.1).set_trans(Tween.TRANS_SINE)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b178lp23jx1ge"]
+[gd_scene load_steps=7 format=3 uid="uid://b178lp23jx1ge"]
 
 [ext_resource type="Theme" uid="uid://cvlf2btibwka4" path="res://assets/new_theme.tres" id="1_xi6ic"]
 [ext_resource type="Script" path="res://src/Title/title.gd" id="1_yridu"]
 [ext_resource type="Texture2D" uid="uid://ds4pp6yb7bpoo" path="res://assets/sprites/Neuro.png" id="3_yvlww"]
 [ext_resource type="Texture2D" uid="uid://0hsaxvwivtxc" path="res://assets/sprites/EvilNeuro.png" id="4_i1gud"]
+[ext_resource type="AudioStream" uid="uid://ck6pscbgvw17i" path="res://assets/Music/LIFE midi.mp3" id="5_dg084"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tcebc"]
 font_size = 80
@@ -117,6 +118,15 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_i1gud")
 stretch_mode = 5
+
+[node name="Sounds" type="AudioStreamPlayer" parent="."]
+volume_db = -8.201
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_dg084")
+volume_db = -14.556
+autoplay = true
+parameters/looping = true
 
 [connection signal="pressed" from="Title/VSplitContainer2/VSplitContainer2/CenterContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Title/VSplitContainer2/VSplitContainer2/CenterContainer3/Quit" to="." method="_on_quit_pressed"]

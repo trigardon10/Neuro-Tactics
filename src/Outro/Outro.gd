@@ -29,6 +29,7 @@ func _ready() -> void:
 	showDialog("Thats right, we all love you, Evil. Even Chat loves you.", "Anny:")
 	await pressedEnter
 	showDialog("Let's all go home, together.", "Neuro:")
+	$Music.play()
 	await get_tree().create_timer(0.3).timeout
 	var tween1 = create_tween()
 	tween1.tween_property($Camera2D, "position", Vector2($Camera2D.position.x, $Camera2D.position.y + (64*10)), 4).set_trans(Tween.TRANS_LINEAR)

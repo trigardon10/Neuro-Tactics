@@ -44,7 +44,7 @@ func _ready() -> void:
 	
 	$CanvasLayer/MarginContainer/ColorRect.color = red
 	
-	showDialog("Thats right, if you want to get to me, you must defeat the memories of your Past.", "Evil:")
+	showDialog("Thats right, if you want to get to me, you must defeat the memories of your past.", "Evil:")
 	await pressedEnter
 	showDialog("Are you ready or are you too much of a chicken?", "Evil:")
 	await pressedEnter

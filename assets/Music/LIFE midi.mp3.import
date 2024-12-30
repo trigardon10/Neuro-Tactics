@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ck6pscbgvw17i"
+path="res://.godot/imported/LIFE midi.mp3-91f3784908a76abfab1a35651f859b98.mp3str"
+
+[deps]
+
+source_file="res://assets/Music/LIFE midi.mp3"
+dest_files=["res://.godot/imported/LIFE midi.mp3-91f3784908a76abfab1a35651f859b98.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -85,4 +85,5 @@ func set_pos(time:float = 0.03):
 	var new_pos = Vector2(current_position[0] * Globals.tile_size + (Globals.tile_size/2), current_position[1] * Globals.tile_size + (Globals.tile_size/2))
 	var tween = create_tween()
 	tween.tween_property(self, "position", new_pos, time).set_trans(Tween.TRANS_SINE)
+	await tween.finished
 	get_parent().new_cursor_position()

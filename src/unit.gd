@@ -32,7 +32,13 @@ func set_pos(time:float = 0.2):
 
 func take_damage(value):
 	unit_health -= value
+	if unit_health < 0:
+		unit_health = 0
+	if unit_health > unit_maxhealth:
+		unit_health = unit_maxhealth
 	get_parent().new_cursor_position()
+	$"../Sounds".stream = preload("res://assets/sounds/retro-hurt-1-236672.mp3") if value >= 0 else preload("res://assets/sounds/experimental-8-bit-sound-270302.mp3")
+	$"../Sounds".play()
 	var old_modulate = modulate
 	var tween = create_tween()
 	var mod_color = Color(1,0,0,1) if value >= 0 else Color(0.5,1,0.5,1)
@@ -42,6 +48,8 @@ func take_damage(value):
 	await tween.finished
 	
 	if(unit_health <= 0):
+		$"../Sounds".stream = preload("res://assets/sounds/retro-explode-1-236678.mp3")
+		$"../Sounds".play()
 		var deathtween = create_tween()
 		deathtween.tween_property(self, "modulate", Color(1,1,1,0), 0.6).set_trans(Tween.TRANS_SINE)
 		await deathtween.finished
@@ -51,7 +59,7 @@ func take_damage(value):
 func set_used():
 	used = true;
 	self.modulate = Color(0.5, 0.5, 0.5, 1)
-	get_parent().check_end_turn(self)
+	await get_parent().check_end_turn(self)
 
 func set_free():
 	used = false;

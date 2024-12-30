@@ -19,6 +19,9 @@ func do_turn():
 		await get_tree().create_timer(0.5).timeout
 		return
 	
+	$"../Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
+	$"../Sounds".play()
+	
 	var friendly_units = []
 	for unit in get_parent().units.values():
 		if(unit.friendly):
@@ -44,6 +47,9 @@ func do_turn():
 	
 	await get_tree().create_timer(0.5).timeout
 	
+	$"../Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
+	$"../Sounds".play()
+	
 	get_parent().units.erase(str(current_position[0], '_', current_position[1]))
 	self.current_position = closest_tile.pos.duplicate()
 	self.set_pos(0.2)
@@ -60,7 +66,7 @@ func do_turn():
 		var unit_to_attack = null
 		tiles = get_parent().get_in_range_tiles(current_position, 1)
 		for tile in tiles.values():
-			get_parent().tilemap_highlight.set_cell(Vector2i(tile['pos'][0], tile['pos'][1]), 2, Vector2i.ZERO)
+			get_parent().tilemap_highlight.set_cell(Vector2i(tile['pos'][0], tile['pos'][1]), 2, Vector2i.DOWN)
 			var tile_unit = get_parent().get_unit(tile.pos)
 			if(tile_unit != null && tile_unit.friendly):
 				unit_to_attack = tile_unit
@@ -75,6 +81,9 @@ func do_turn():
 		$"../Cursor".set_pos()
 		
 		await get_tree().create_timer(0.5).timeout
+		
+		$"../Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
+		$"../Sounds".play()
 		
 		get_parent().tilemap_highlight.clear()
 		await get_parent().animate_attack(self, unit_to_attack)

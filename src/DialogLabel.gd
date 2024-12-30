@@ -11,3 +11,5 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if self.visible_characters < self.text.length():
 		self.visible_characters += 1
+		$"../../../../Sounds".stream = preload("res://assets/sounds/8-bit-game-sfx-sound-24-269959.mp3")
+		$"../../../../Sounds".play()

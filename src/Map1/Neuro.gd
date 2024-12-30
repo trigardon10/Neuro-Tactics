@@ -36,4 +36,3 @@ func finish_special(unit):
 	unit_power = 6
 	await get_parent().combat(self, unit)
 	unit_power = 3
-	set_used()

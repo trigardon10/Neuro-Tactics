@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://d2lg653ydaelr"]
+[gd_scene load_steps=13 format=4 uid="uid://d2lg653ydaelr"]
 
 [ext_resource type="Script" path="res://src/Outro/Outro.gd" id="1_islk6"]
 [ext_resource type="TileSet" uid="uid://dirym2pwco6tr" path="res://assets/tiles/myTiles.tres" id="1_vcqto"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://0hsaxvwivtxc" path="res://assets/sprites/EvilNeuro.png" id="5_tvpam"]
 [ext_resource type="Theme" uid="uid://cvlf2btibwka4" path="res://assets/new_theme.tres" id="7_pp4nv"]
 [ext_resource type="Script" path="res://src/DialogLabel.gd" id="8_7yc6h"]
+[ext_resource type="AudioStream" uid="uid://ck6pscbgvw17i" path="res://assets/Music/LIFE midi.mp3" id="10_gksqy"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f82rm"]
 content_margin_left = 8.0
@@ -97,8 +98,6 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxEmpty_oqchq")
-text = "Das ist ein Dialog Bla Bla Bla B
-Das ist ein Dialog Bla Bla Bla B"
 autowrap_mode = 2
 script = ExtResource("8_7yc6h")
 
@@ -135,3 +134,11 @@ visible_ratio = 0.0
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(826, 248)
 zoom = Vector2(2, 2)
+
+[node name="Sounds" type="AudioStreamPlayer" parent="."]
+volume_db = -8.666
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_gksqy")
+volume_db = -14.557
+parameters/looping = true
