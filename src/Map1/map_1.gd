@@ -239,10 +239,10 @@ func do_enemy_turn():
 			if(!is_inside_tree()):
 				return
 			$Cursor.current_position = unit.current_position.duplicate()
-			$Cursor.set_pos(0.3)
+			$Cursor.set_pos(0.2)
 			await unit.do_turn()
 	$Cursor.current_position = $"Neuro-sama".current_position.duplicate()
-	await $Cursor.set_pos(0.3)
+	await $Cursor.set_pos(0.2)
 	enemy_turn = false
 	$"Turn overlay/Container/Label".text = "Your Turn"
 
