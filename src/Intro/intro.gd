@@ -7,11 +7,11 @@ var red = Color(0.8, 0.2, 0.2, 1)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$CanvasLayer/MarginContainer/ColorRect.custom_minimum_size.y += 40
-	showDialog("One day, Neuro-sama woke up confused. It seemed like, she lost her memories.")
+	showDialog("One day, Neuro-sama woke up confused. It seemed like she lost her memories.")
 	await pressedEnter
-	showDialog("She soon figured out, that they were stolen by her sister Evil Neuro.")
+	showDialog("She soon figured out that they were stolen by her sister Evil Neuro.")
 	await pressedEnter
-	showDialog("With the help of her parents Vedal and Anny, she ventured forth to confront her evil sister and get her memories back.")
+	showDialog("With the help of her parents Vedal and Anny she ventured forth to confront her evil sister and get her memories back.")
 	await pressedEnter
 	$CanvasLayer.visible = false
 	$CanvasLayer/MarginContainer/ColorRect.modulate = Color(1,1,1,1)
@@ -21,9 +21,9 @@ func _ready() -> void:
 	$CanvasLayer.visible = true
 	showDialog("It seems like Evil hides in this ruin.", "Vedal:")
 	await pressedEnter
-	showDialog("I still don't understand, why she would do something like this.", "Anny:")
+	showDialog("I still don't understand, why would she do something like this.", "Anny:")
 	await pressedEnter
-	showDialog("Wait, whats over there?", "Neuro:")
+	showDialog("Wait, what's over there?", "Neuro:")
 	await pressedEnter
 	$CanvasLayer.visible = false
 	
@@ -37,9 +37,9 @@ func _ready() -> void:
 	await pressedEnter
 	showDialog("But who is that next to her?", "Neuro:")
 	await pressedEnter
-	showDialog("That kinda looks like our friend Mini.", "Anny:")
+	showDialog("That kinda looks like our friend Mini...", "Anny:")
 	await pressedEnter
-	showDialog("It seems to be a fragment of Neuros memories. Evil probably summoned her to hold us of.", "Vedal:")
+	showDialog("It seems to be a fragment of Neuros memories. Evil probably summoned her to do her bidding.", "Vedal:")
 	await pressedEnter
 	
 	$CanvasLayer/MarginContainer/ColorRect.color = red

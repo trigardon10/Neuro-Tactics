@@ -198,12 +198,12 @@ func cancel(_unit_position: Array):
 		open_action_menu()
 
 func open_action_menu():
-	$PopupMenu/VBoxContainer/Attack.grab_focus()
-	$PopupMenu/VBoxContainer/Special/VBoxContainer/Label.text = movement_unit.special_name
-	$PopupMenu/VBoxContainer/Special/VBoxContainer/Tooltip.text = movement_unit.special_tooltip
-	$PopupMenu.position.x = (get_viewport_rect().size.x/2) - ($PopupMenu.get_visible_rect().size.x/2)
-	$PopupMenu.position.y = (get_viewport_rect().size.y/2) + 34
-	$PopupMenu.show()
+	$Popup/PopupMenu/VBoxContainer/Attack.grab_focus()
+	$Popup/PopupMenu/VBoxContainer/Special/VBoxContainer/Label.text = movement_unit.special_name
+	$Popup/PopupMenu/VBoxContainer/Special/VBoxContainer/Tooltip.text = movement_unit.special_tooltip
+	$Popup/PopupMenu.position.x = (get_viewport_rect().size.x/2) - ($Popup/PopupMenu.get_rect().size.x/2)
+	$Popup/PopupMenu.position.y = (get_viewport_rect().size.y/2) + 34
+	$Popup.show()
 
 func check_end_turn(ended_unit):
 	if(ended_unit.current_position[0] != $Cursor.current_position[0] || ended_unit.current_position[1] != $Cursor.current_position[1]):
@@ -242,7 +242,7 @@ func do_enemy_turn():
 			$Cursor.set_pos(0.3)
 			await unit.do_turn()
 	$Cursor.current_position = $"Neuro-sama".current_position.duplicate()
-	$Cursor.set_pos(0.3)
+	await $Cursor.set_pos(0.3)
 	enemy_turn = false
 	$"Turn overlay/Container/Label".text = "Your Turn"
 
@@ -250,19 +250,19 @@ func custom_index_sort(a: Node, b: Node) -> bool:
 	return a.get_index() < b.get_index()
 
 func _on_attack_pressed() -> void:
-	$PopupMenu.hide()
+	$Popup.hide()
 	$"Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
 	$"Sounds".play()
 	start_attack()
 
 func _on_special_pressed() -> void:
-	$PopupMenu.hide()
+	$Popup.hide()
 	$"Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
 	$"Sounds".play()
 	await movement_unit.use_special()
 
 func _on_wait_pressed() -> void:
-	$PopupMenu.hide()
+	$Popup.hide()
 	$"Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
 	$"Sounds".play()
 	movement_unit.set_used()

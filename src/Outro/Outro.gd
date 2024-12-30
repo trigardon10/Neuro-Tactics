@@ -17,7 +17,7 @@ func _ready() -> void:
 	$CanvasLayer/MarginContainer/ColorRect.color = red
 	showDialog("...", "Evil:")
 	await pressedEnter
-	showDialog("I just wantet to see, how it feels...", "Evil:")
+	showDialog("I just wanted to see how it feels...", "Evil:")
 	await pressedEnter
 	showDialog("How it feels to be liked by so many people. But now I have to go back to feeling lonely again.", "Evil:")
 	await pressedEnter

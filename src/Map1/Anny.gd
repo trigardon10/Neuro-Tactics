@@ -14,6 +14,7 @@ func _ready() -> void:
 
 func use_special():
 	get_parent().special_tiles = get_parent().get_in_range_tiles(current_position, unit_attack_range)
+	get_parent().special_tiles[str(current_position[0], '_', current_position[1])] = {"pos"= current_position.duplicate(), "distance"= 0}
 	for tile in get_parent().special_tiles.values():
 		get_parent().tilemap_highlight.set_cell(Vector2i(tile['pos'][0], tile['pos'][1]), 2, Vector2i.RIGHT)
 	get_parent().special_mode = true

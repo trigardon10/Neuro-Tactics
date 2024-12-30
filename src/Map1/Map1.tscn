@@ -19,20 +19,12 @@
 [ext_resource type="Texture2D" uid="uid://men7tbblh8nq" path="res://assets/sprites/memory_Toma.png" id="13_xn7ua"]
 [ext_resource type="Texture2D" uid="uid://thg2kluxs4je" path="res://assets/sprites/memory_Cerber.png" id="14_s3kjw"]
 [ext_resource type="Texture2D" uid="uid://d0wodf3xm38wk" path="res://assets/sprites/memory_Camilla.png" id="15_4fnul"]
+[ext_resource type="Script" path="res://src/Map1/popup.gd" id="18_xoaoo"]
 [ext_resource type="Script" path="res://src/fade_container.gd" id="20_56s2y"]
 [ext_resource type="AudioStream" uid="uid://deh28l01g52q8" path="res://assets/Music/kim-lightyear-angel-eyes-chiptune-edit-110226.mp3" id="21_yn673"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yc3xe"]
-bg_color = Color(0.2, 0.4, 1, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bepiy"]
-content_margin_left = 4.0
-content_margin_top = 0.0
-content_margin_right = 4.0
-content_margin_bottom = 0.0
 bg_color = Color(0, 0, 1, 1)
-expand_margin_left = 4.0
-expand_margin_right = 4.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8iofa"]
 content_margin_left = 4.0
@@ -146,23 +138,37 @@ metadata/_edit_lock_ = true
 [node name="Camera2D" type="Camera2D" parent="Cursor"]
 metadata/_edit_lock_ = true
 
-[node name="PopupMenu" type="PopupPanel" parent="."]
-position = Vector2i(426, 243)
-size = Vector2i(550, 146)
-always_on_top = true
-theme = ExtResource("9_f0c18")
-theme_override_styles/panel = SubResource("StyleBoxFlat_yc3xe")
+[node name="Popup" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("18_xoaoo")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PopupMenu"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 550.0
-offset_bottom = 146.0
+[node name="PopupMenu" type="MarginContainer" parent="Popup"]
+custom_minimum_size = Vector2(550, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -26.0
+offset_bottom = -178.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("9_f0c18")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
-[node name="Attack" type="Button" parent="PopupMenu/VBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="Popup/PopupMenu"]
+layout_mode = 2
+color = Color(0.2, 0.4, 1, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Popup/PopupMenu"]
+layout_mode = 2
+
+[node name="Attack" type="Button" parent="Popup/PopupMenu/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_font_sizes/font_size = 32
@@ -173,7 +179,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_bepiy")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_8iofa")
 text = "Attack"
 
-[node name="Special" type="Button" parent="PopupMenu/VBoxContainer"]
+[node name="Special" type="Button" parent="Popup/PopupMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 mouse_filter = 2
@@ -184,7 +190,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_bepiy")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_kybyg")
 alignment = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PopupMenu/VBoxContainer/Special"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Popup/PopupMenu/VBoxContainer/Special"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -192,20 +198,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="PopupMenu/VBoxContainer/Special/VBoxContainer"]
+[node name="Label" type="Label" parent="Popup/PopupMenu/VBoxContainer/Special/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxEmpty_5w0l2")
 text = "Special"
 horizontal_alignment = 1
 
-[node name="Tooltip" type="Label" parent="PopupMenu/VBoxContainer/Special/VBoxContainer"]
+[node name="Tooltip" type="Label" parent="Popup/PopupMenu/VBoxContainer/Special/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_3142k")
 text = "Tooltip"
 horizontal_alignment = 1
 
-[node name="Wait" type="Button" parent="PopupMenu/VBoxContainer"]
+[node name="Wait" type="Button" parent="Popup/PopupMenu/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_font_sizes/font_size = 32
@@ -364,7 +370,7 @@ autoplay = true
 parameters/looping = true
 
 [connection signal="ready" from="Memory1" to="." method="_on_memory_1_ready"]
-[connection signal="pressed" from="PopupMenu/VBoxContainer/Attack" to="." method="_on_attack_pressed"]
-[connection signal="pressed" from="PopupMenu/VBoxContainer/Special" to="." method="_on_special_pressed"]
-[connection signal="pressed" from="PopupMenu/VBoxContainer/Wait" to="." method="_on_wait_pressed"]
+[connection signal="pressed" from="Popup/PopupMenu/VBoxContainer/Attack" to="." method="_on_attack_pressed"]
+[connection signal="pressed" from="Popup/PopupMenu/VBoxContainer/Special" to="." method="_on_special_pressed"]
+[connection signal="pressed" from="Popup/PopupMenu/VBoxContainer/Wait" to="." method="_on_wait_pressed"]
 [connection signal="ready" from="FadeContainer/ColorRect" to="." method="_on_color_rect_ready"]
