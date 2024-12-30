@@ -33,9 +33,6 @@ func _process(_delta: float) -> void:
 func set_pos(time:float = 0.2):
 	var new_pos = Vector2(current_position[0] * Globals.tile_size + (Globals.tile_size/2), current_position[1] * Globals.tile_size + (Globals.tile_size/2))
 
-	if animated_sprite_2d != null:
-		animated_sprite_2d.play("walk")
-
 	var tween = create_tween()
 
 	tween.tween_property(self, "position", new_pos, time).set_trans(Tween.TRANS_SINE)

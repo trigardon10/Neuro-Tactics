@@ -203,6 +203,7 @@ func end_attack():
 func end_special():
 	special_tiles = {}
 	tilemap_highlight.clear()
+	play_animation(movement_unit, "idle")
 	special_mode = false
 
 func cancel(_unit_position: Array):
@@ -312,6 +313,5 @@ func _on_memory_1_ready() -> void:
 	$Memory1.active = true
 	
 func play_animation(unit, anim_name):
-	var sprite = unit.get_node("AnimatedSprite2D") as AnimatedSprite2D
-	if sprite != null:
-		sprite.play(anim_name)
+	if unit.animated_sprite_2d != null:
+		unit.animated_sprite_2d.play(anim_name)

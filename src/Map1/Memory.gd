@@ -40,6 +40,7 @@ func do_turn():
 				closest_distance = distance
 				closest_tile = tile
 	
+	get_parent().play_animation(self, "walk")
 	await get_tree().create_timer(0.5).timeout
 	
 	$"../Cursor".current_position = closest_tile.pos.duplicate()
@@ -52,7 +53,9 @@ func do_turn():
 	
 	get_parent().units.erase(str(current_position[0], '_', current_position[1]))
 	self.current_position = closest_tile.pos.duplicate()
+	
 	self.set_pos(0.2)
+	get_parent().play_animation(self, "idle")
 	get_parent().add_unit(self, current_position)
 	
 	await get_tree().create_timer(0.2).timeout
@@ -75,6 +78,7 @@ func do_turn():
 			get_parent().tilemap_highlight.clear()
 			return
 		
+		get_parent().play_animation(self, "atk")
 		await get_tree().create_timer(0.5).timeout
 		
 		$"../Cursor".current_position = unit_to_attack.current_position.duplicate()
@@ -88,6 +92,7 @@ func do_turn():
 		get_parent().tilemap_highlight.clear()
 		await get_parent().animate_attack(self, unit_to_attack)
 		await unit_to_attack.take_damage(unit_power)
+		get_parent().play_animation(self, "idle")
 		
 		if(!is_inside_tree()):
 			return

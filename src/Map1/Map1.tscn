@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://dtxhngnpoenrn"]
+[gd_scene load_steps=64 format=4 uid="uid://dtxhngnpoenrn"]
 
 [ext_resource type="Script" path="res://src/Map1/map_1.gd" id="1_dc2ru"]
 [ext_resource type="TileSet" uid="uid://dirym2pwco6tr" path="res://assets/tiles/myTiles.tres" id="1_w6icf"]
@@ -20,8 +20,10 @@
 [ext_resource type="Texture2D" uid="uid://b4gmmek37gk0x" path="res://assets/sprites/anny-sheet.png" id="11_itdlt"]
 [ext_resource type="Texture2D" uid="uid://feu1bv6krt8k" path="res://assets/sprites/memory_Mini.png" id="12_83f4r"]
 [ext_resource type="Texture2D" uid="uid://men7tbblh8nq" path="res://assets/sprites/memory_Toma.png" id="13_xn7ua"]
+[ext_resource type="Texture2D" uid="uid://bjiio15nyqav2" path="res://assets/sprites/EvilNeuro-sheet.png" id="14_eyprq"]
 [ext_resource type="Texture2D" uid="uid://thg2kluxs4je" path="res://assets/sprites/memory_Cerber.png" id="14_s3kjw"]
 [ext_resource type="Texture2D" uid="uid://d0wodf3xm38wk" path="res://assets/sprites/memory_Camilla.png" id="15_4fnul"]
+[ext_resource type="Texture2D" uid="uid://dd26l8hlvn3x4" path="res://assets/sprites/memory_cerber-sheet.png" id="17_d8khw"]
 [ext_resource type="Script" path="res://src/Map1/popup.gd" id="18_xoaoo"]
 [ext_resource type="Script" path="res://src/fade_container.gd" id="20_56s2y"]
 [ext_resource type="AudioStream" uid="uid://deh28l01g52q8" path="res://assets/Music/kim-lightyear-angel-eyes-chiptune-edit-110226.mp3" id="21_yn673"]
@@ -132,12 +134,39 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_3oagw"]
+atlas = ExtResource("11_itdlt")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37h2c"]
+atlas = ExtResource("11_itdlt")
+region = Rect2(256, 0, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_xb5bo"]
 atlas = ExtResource("11_itdlt")
 region = Rect2(0, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmssx"]
+atlas = ExtResource("11_itdlt")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_grfm8"]
+atlas = ExtResource("11_itdlt")
+region = Rect2(128, 0, 64, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_b3hv7"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3oagw")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_37h2c")
+}],
+"loop": true,
+"name": &"atk",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xb5bo")
@@ -146,9 +175,121 @@ animations = [{
 "name": &"idle",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tmssx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_grfm8")
+}],
 "loop": true,
-"name": &"new_animation",
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kjxl"]
+atlas = ExtResource("14_eyprq")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f35rk"]
+atlas = ExtResource("14_eyprq")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_364dm"]
+atlas = ExtResource("14_eyprq")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21yyf"]
+atlas = ExtResource("14_eyprq")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpokn"]
+atlas = ExtResource("14_eyprq")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_agreb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7kjxl")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_f35rk")
+}],
+"loop": true,
+"name": &"atk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_364dm")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21yyf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpokn")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yj6c8"]
+atlas = ExtResource("17_d8khw")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_malo4"]
+atlas = ExtResource("17_d8khw")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48y3n"]
+atlas = ExtResource("17_d8khw")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vgqe"]
+atlas = ExtResource("17_d8khw")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ny5kj"]
+atlas = ExtResource("17_d8khw")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mxi3b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yj6c8")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_malo4")
+}],
+"loop": true,
+"name": &"atk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48y3n")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vgqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ny5kj")
+}],
+"loop": true,
+"name": &"walk",
 "speed": 5.0
 }]
 
@@ -237,43 +378,69 @@ metadata/_edit_lock_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Anny"]
 sprite_frames = SubResource("SpriteFrames_b3hv7")
-animation = &"new_animation"
+animation = &"idle"
+frame_progress = 0.108808
 
 [node name="Evil Neuro" type="Area2D" parent="."]
 position = Vector2(992, 352)
 script = ExtResource("5_hkc61")
 
 [node name="Sprite2D" type="Sprite2D" parent="Evil Neuro"]
+visible = false
 texture = ExtResource("10_yu7je")
 metadata/_edit_lock_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Evil Neuro"]
+sprite_frames = SubResource("SpriteFrames_agreb")
+animation = &"idle"
 
 [node name="Memory1" type="Area2D" parent="."]
 position = Vector2(992, 1504)
 script = ExtResource("9_48cuy")
 
 [node name="Sprite2D" type="Sprite2D" parent="Memory1"]
+visible = false
 texture = ExtResource("12_83f4r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Memory1"]
+sprite_frames = SubResource("SpriteFrames_mxi3b")
+animation = &"idle"
 
 [node name="Memory2" type="Area2D" parent="."]
 position = Vector2(1568, 800)
 script = ExtResource("9_48cuy")
 
 [node name="Sprite2D" type="Sprite2D" parent="Memory2"]
+visible = false
 texture = ExtResource("13_xn7ua")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Memory2"]
+sprite_frames = SubResource("SpriteFrames_mxi3b")
+animation = &"idle"
 
 [node name="Memory4" type="Area2D" parent="."]
 position = Vector2(992, 800)
 script = ExtResource("9_48cuy")
 
 [node name="Sprite2D" type="Sprite2D" parent="Memory4"]
+visible = false
 texture = ExtResource("15_4fnul")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Memory4"]
+sprite_frames = SubResource("SpriteFrames_mxi3b")
+animation = &"idle"
 
 [node name="Memory3" type="Area2D" parent="."]
 position = Vector2(416, 800)
 script = ExtResource("9_48cuy")
 
 [node name="Sprite2D" type="Sprite2D" parent="Memory3"]
+visible = false
 texture = ExtResource("14_s3kjw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Memory3"]
+sprite_frames = SubResource("SpriteFrames_mxi3b")
+animation = &"idle"
 
 [node name="Projectile" type="Node2D" parent="."]
 visible = false

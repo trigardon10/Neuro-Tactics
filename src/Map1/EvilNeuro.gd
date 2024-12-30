@@ -46,9 +46,10 @@ func do_turn():
 			
 			$"../Sounds".stream = preload("res://assets/sounds/coin-collect-retro-8-bit-sound-effect-145251.mp3")
 			$"../Sounds".play()
-			
+			get_parent().play_animation(self, "atk")
 			await get_parent().animate_attack(self, unit_to_attack)
 			await unit_to_attack.take_damage(unit_power)
+			get_parent().play_animation(self, "idle")
 			
 			if(!is_inside_tree()):
 				return

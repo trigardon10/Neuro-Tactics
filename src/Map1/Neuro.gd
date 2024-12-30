@@ -41,6 +41,3 @@ func finish_special(unit):
 	await get_parent().combat(self, unit)
 	unit_power = 3#
 	
-func test():
-	print("Test")	
-	pass
