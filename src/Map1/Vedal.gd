@@ -21,7 +21,6 @@ func use_special():
 	turle_mode = true
 	set_used()
 
-
 func take_damage(value):
 	if turle_mode:
 		turle_mode = false

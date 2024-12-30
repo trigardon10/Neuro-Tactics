@@ -9,6 +9,7 @@ func _ready() -> void:
 	unit_range = 0
 	unit_attack_range = 5
 	friendly = false
+	sprite = preload("res://assets/sprites/harpoon.png")
 	force_sprite = true
 	super._ready()
 
@@ -49,7 +50,10 @@ func do_turn():
 			await get_parent().animate_attack(self, unit_to_attack)
 			await unit_to_attack.take_damage(unit_power)
 			
-			await get_tree().create_timer(0.5).timeout
+			if(!is_inside_tree()):
+				return
+			
+			await get_tree().create_timer(0.3).timeout
 		
 		get_parent().tilemap_highlight.clear()
 		

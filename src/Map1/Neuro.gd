@@ -10,6 +10,7 @@ func _ready() -> void:
 	unit_attack_range = 3
 	special_name = "Swarm Strike"
 	special_tooltip = "Powerful Attack. Can only target enemies next to Neuro."
+	sprite = preload("res://assets/sprites/drone.png")
 	super._ready()
 
 func take_damage(value):
@@ -19,6 +20,8 @@ func take_damage(value):
 		$"../Defeat  Overlay".visible = 1
 		var tween = create_tween()
 		tween.tween_property($"../Defeat  Overlay/Container", "modulate", Color(1,1,1,1), 1).set_trans(Tween.TRANS_SINE)
+		var sound_tween = create_tween()
+		sound_tween.tween_property($"../Music", "volume_db", -80, 1).set_trans(Tween.TRANS_SINE)
 		await tween.finished
 		await get_tree().create_timer(1).timeout
 		get_tree().change_scene_to_file("res://src/Title/title.tscn")

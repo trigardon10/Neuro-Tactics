@@ -11,7 +11,9 @@ var current_position = [0, 0]
 var special_name = "null"
 var special_tooltip = "null"
 var used = false
+var sprite =  null
 var force_sprite = false
+var dont_rotate = false
 
 var animated_sprite_2d: AnimatedSprite2D
 
@@ -30,14 +32,14 @@ func _process(_delta: float) -> void:
 
 func set_pos(time:float = 0.2):
 	var new_pos = Vector2(current_position[0] * Globals.tile_size + (Globals.tile_size/2), current_position[1] * Globals.tile_size + (Globals.tile_size/2))
-	
+
 	if animated_sprite_2d != null:
 		animated_sprite_2d.play("walk")
-		
+
 	var tween = create_tween()
-	
+
 	tween.tween_property(self, "position", new_pos, time).set_trans(Tween.TRANS_SINE)
-	
+
 	#if animated_sprite_2d != null:
 		#print("ayy")
 
@@ -103,3 +105,6 @@ func get_distance(pos1, pos2):
 	var x = abs(pos1[0] - pos2[0])
 	var y = abs(pos1[1] - pos2[1])
 	return x+y
+
+func get_distance_to(unit):
+	return get_distance(current_position, unit.current_position)
