@@ -21,6 +21,11 @@ config/windows_native_icon="res://assets/Icon.ico"
 
 Globals="*res://src/globals.gd"
 
+[display]
+
+window/size/resizable=false
+window/stretch/mode="viewport"
+
 [input]
 
 ui_left={

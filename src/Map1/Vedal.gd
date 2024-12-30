@@ -22,7 +22,7 @@ func use_special():
 	set_used()
 
 func take_damage(value):
-	if turle_mode:
+	if turle_mode && value > 0:
 		turle_mode = false
 		$"../Sounds".stream = preload("res://assets/sounds/blipSelect.wav")
 		$"../Sounds".play()

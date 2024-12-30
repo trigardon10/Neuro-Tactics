@@ -1,7 +1,6 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://cvlf2btibwka4"]
 
-[sub_resource type="SystemFont" id="SystemFont_6un4t"]
-font_names = PackedStringArray("Monospace")
+[ext_resource type="FontFile" uid="uid://qb70vkcyol08" path="res://assets/Fonts/cour.ttf" id="1_w6dsg"]
 
 [resource]
-default_font = SubResource("SystemFont_6un4t")
+default_font = ExtResource("1_w6dsg")
